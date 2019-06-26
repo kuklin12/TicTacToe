@@ -1,0 +1,51 @@
+
+body {
+    font-family: sans-serif;
+    font-family: 'Indie Flower', cursive;
+}
+.game {
+    width: 306px; background: #f0f0f0;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 100px);
+    grid-gap: 3px;
+    display: grid;
+    border: 1px solid #ddd;
+    cursor: pointer;
+}
+.cell {
+    background: #55bfe3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    color: #222;
+    border-radius: 25px;
+}
+.cell:hover {
+    background: #78c5fa;
+}
+.board{
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 50px;
+}
+h1{
+    font-size: 50px;
+    display: flex;
+    justify-content: center;
+}
+.gameReset{
+    display: flex;
+    justify-content: center;
+}
+button{
+    font-size: 25px;
+    border-radius: 25px;
+    font-family: 'Indie Flower', cursive;
+}
+#info{
+    display: flex;
+    justify-content: center;
+    font-size: 25px;
+}
