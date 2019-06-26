@@ -39,9 +39,25 @@ function write(event) {
             }
         }
         if (turn == 9) {
-            infoWin.innerText = "Draw! Please wait for reset.";
-            block = 1;
-            setTimeout(reset, 3000);
+            check(playersMoves);
+            if(winner == 1){
+                infoWin.innerText = "X wins! Please wait for reset.";
+                block = 1;
+                setTimeout(reset, 3000);
+            }
+            else {
+                check(compMoves);
+                if(winner == 1){
+                    infoWin.innerText = "O wins! Please wait for reset.";
+                    block = 1;
+                    setTimeout(reset, 3000);
+                }
+                else {
+                    infoWin.innerText = "Draw! Please wait for reset.";
+                    block = 1;
+                    setTimeout(reset, 3000);
+                }
+            }
         }
     }
 }
