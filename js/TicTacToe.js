@@ -13,8 +13,8 @@ const player = 'X';
 const comp = 'O';
 let playersMoves = [];
 let compMoves = [];
-let winner = 0;
-let block = 0;
+let winner = false;
+let blockGame = false;
 const cells = [...document.querySelectorAll('.cell')];
 cells.forEach(cell => cell.addEventListener('click', write));
 const btn = document.querySelector('#reset');
@@ -22,7 +22,7 @@ btn.addEventListener('click', reset);
 const infoWin = document.querySelector('#info')
 
 function write(event) {
-    if (block == 0) {
+    if (blockGame == false) {
         let tempPlayer = document.getElementById(event.target.id);
         if (tempPlayer.innerText == "") {
             let text = document.createTextNode(player);
@@ -30,9 +30,9 @@ function write(event) {
             playersMoves.push(Number(event.target.id));
             turn++;
             check(playersMoves);
-            if (winner == 1) {
+            if (winner == true) {
                 infoWin.innerText = "X wins! Please wait for reset.";
-                block = 1;
+                blockGame = true;
                 setTimeout(reset, 3000);
             } else {
                 computer();
@@ -40,21 +40,19 @@ function write(event) {
         }
         if (turn == 9) {
             check(playersMoves);
-            if(winner == 1){
+            if (winner == true) {
                 infoWin.innerText = "X wins! Please wait for reset.";
-                block = 1;
+                blockGame = true;
                 setTimeout(reset, 3000);
-            }
-            else {
+            } else {
                 check(compMoves);
-                if(winner == 1){
+                if (winner == true) {
                     infoWin.innerText = "O wins! Please wait for reset.";
-                    block = 1;
+                    blockGame = true;
                     setTimeout(reset, 3000);
-                }
-                else {
+                } else {
                     infoWin.innerText = "Draw! Please wait for reset.";
-                    block = 1;
+                    blockGame = true;
                     setTimeout(reset, 3000);
                 }
             }
@@ -63,20 +61,20 @@ function write(event) {
 }
 
 function computer() {
-    let empty = 1;
+    let empty = true;
     if (turn < 8) {
-        while (empty == 1) {
+        while (empty == true) {
             let tempComp = document.getElementById(randomize());
             if (tempComp.innerText == "") {
                 let text = document.createTextNode(comp);
                 tempComp.appendChild(text);
                 compMoves.push(Number(tempComp.id));
                 turn++;
-                empty = 0;
+                empty = false;
                 check(compMoves);
-                if (winner == 1) {
+                if (winner == true) {
                     infoWin.innerText = "O wins! Please wait for reset.";
-                    block = 1;
+                    blockGame = true;
                     setTimeout(reset, 3000);
                 }
             }
@@ -95,17 +93,18 @@ function reset() {
         res.innerText = "";
     }
     turn = 0;
-    winner = 0;
+    winner = false;
     playersMoves.length = 0;
     compMoves.length = 0;
     infoWin.innerHTML = "";
-    block = 0;
+    blockGame = false;
+
 }
 
 function check(moves) {
     for (let i = 0; i < 8; i++) {
         if (includesAll(moves, winConditions[i])) {
-            winner = 1;
+            winner = true;
             break;
         }
     }
